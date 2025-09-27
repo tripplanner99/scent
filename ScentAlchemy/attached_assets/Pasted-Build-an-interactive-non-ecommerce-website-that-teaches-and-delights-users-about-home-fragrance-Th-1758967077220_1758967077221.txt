@@ -1,0 +1,125 @@
+Build an interactive, non-ecommerce website that teaches and delights users about home fragrance. The experience is a playful exploration — a doodle + drag-and-drop driven playground — driven by a persistent duality concept (every piece of content has two parallel states). Use the attached catalogue One Scent Club - Catalogue.pdf as the canonical content source and inspiration (scent names, categories, product types, packaging & gifting concepts). 
+
+One Scent Club - Catalogue
+
+High-level goals
+
+Create an educational, exploratory experience about fragrance in the home (living room, bedroom, outdoor, bathroom, ritual corners).
+
+Prioritize interaction: doodle board, drag-and-drop scents into rooms, responsive animations and dynamic UI.
+
+Enforce duality everywhere — not limited to Day/Night. Dualities may be Day/Night, Mumbai/New York, Traditional/Contemporary, Minimalist/Maximalist, Warm/Cool, Ritual/Relaxation — the system must support any pairable theme.
+
+Ignore checkout/cart/product purchase flows for now — focus on discovery, play, and storytelling.
+
+Content source & examples (use catalogue)
+
+Use the catalogue as seed content and mapping: categories (Home Care, Ambience: reed diffusers, Devotion incense, Eau de Parfum), sample scent names (e.g., Azure, Reverie), packaging/customization ideas (À Emporter boxes, gifting guide) to craft copy, product art and guided scent journeys. Pull descriptions, product types and packaging cues directly from the catalogue to create educational modules and interactive "cards". 
+
+One Scent Club - Catalogue
+
+Duality rules (must-follow)
+
+Every content entity (room scene, scent card, mascot message, illustration, animation) must have two variants (A and B). The CMS data model must store variantA and variantB for each field that changes (colors, copy, images, animations, ambience sound, scent-intensity mapping).
+
+Provide a global Duality Switcher (top-right) that toggles the whole site between the two states. Additionally, allow per-section duality overrides (e.g., set "Mumbai vs New York" specifically for the living room).
+
+Duality presets: ship with first set: Day | Night, Mumbai | New York, Traditional | Contemporary, Minimalist | Maximalist. Allow editors to add custom dual-pairs.
+
+Core interactive features (detailed)
+
+Interactive Home Map / Floor Plan
+
+Click or tap a room to open its interactive canvas. Each room loads the room’s dual variants.
+
+Rooms are drop zones for scent assets (diffusers, candles, incense, eau de parfum vials). Dropping an asset triggers a visual scent trail, mood-change, and an educational tooltip (“Why this suits night/day or Mumbai/New York”).
+
+Doodle Board (per room + global)
+
+Users can doodle shapes, draw scent trails, or stamp icons (flower, spice, wood). The system interprets simple doodles into fragrance moods (star → night, sun → day).
+
+Doodles animate: a swirl becomes incense smoke, a scribbled sun brightens the scene. Doodles can be saved to a “postcard” and shared (no checkout).
+
+Drag & Drop palette
+
+Left palette: scent assets (Reed Diffuser, Incense bundle, Eau de Parfum sample, Roll-on), each with dual-state visuals + mini audio cue. Drag onto rooms to see immediate ambience change.
+
+Each asset has range controls (intensity slider) and physics-based placement (snap to furniture or hang in air).
+
+Duality selector & contextual transform
+
+Switching duality morphs colors, lighting, copy, scent suggestions, background sound and micro-animations smoothly (e.g., sun → moon, monsoon rain overlay → subway hum for Mumbai→NY).
+
+Playful micro-interactions
+
+Hover → micro-animation (candle flicker, reed ripple).
+
+Click → short guided narration by a dual-personality mascot (Sun/Moon spirit) giving tips.
+
+Subtle soundscape changes with dual variant.
+
+Data & CMS requirements (must produce)
+
+Ask the AI builder to output a CMS schema with these models:
+
+Room { id, name, descriptionA, descriptionB, imageA, imageB, ambientSoundA, ambientSoundB, recommendedAssetsA[], recommendedAssetsB[] }
+
+ScentAsset { id, title, category, notes, imageA, imageB, intensityProfile, seedExampleFromCatalogue }
+
+DualityPreset { id, nameA, nameB, themeTokens }
+
+Doodle { userSvg, interpretedMoodTags[] }
+
+Page and SiteSettings with defaultDuality
+
+Include seeded content pulled from the catalogue (examples: Azure, Reverie, Reed Diffuser, Devotion incense) — the AI must produce a small sample JSON seed based on the provided catalogue. 
+
+One Scent Club - Catalogue
+
+Visual & UI specs (short)
+
+Design tokens: two color palettes per duality; typography scales; motion easing.
+
+Use subtle parallax and soft-glow transitions. Micro-copy: whimsical, warm, educational.
+
+Accessibility: keyboard navigable drag/drop alternatives, ARIA labels for doodle tools, color contrast checks.
+
+Animations & assets (ask AI to list)
+
+Request Lottie animations for: candle flicker, incense smoke, sun↔moon morph, cityscape transitions (Mumbai skyline ↔ NY skyline). Provide fallback CSS animations for performance.
+
+Deliverables the AI builder must produce (explicit)
+
+When you run this prompt, the AI/CMS must output the following artifacts automatically (not later):
+
+README.md — project purpose, tech stack suggestions (React + Tailwind + Framer Motion + Lottie), local setup, deploy, and content-edit workflow for editors.
+
+Step-by-step implementation plan — ordered tasks for designer & dev, component map, and which pages to build first. (No vague “do it later” — list concrete steps.)
+
+CMS schema (as JSON schema) and seed JSON data populated with catalogue examples. 
+
+One Scent Club - Catalogue
+
+Component inventory with props and example usage (RoomCanvas, DoodleBoard, DualitySwitcher, AssetPalette, ScentCard).
+
+Acceptance criteria and a minimal QA checklist (duality toggle, drag/drop, doodle save, accessibility).
+
+Exportable design tokens and a short asset list (icons, lottie files, background images).
+
+A small demo/storyboard (3–4 states) showing a user flow: open home map → doodle in bedroom → drop “Reverie” → switch Mumbai→NY and observe changes.
+
+Acceptance criteria (compact)
+
+Global duality toggle morphs every visible element to its counterpart.
+
+Drag & drop updates room state & shows educational tip.
+
+Doodle interactions produce at least two mapped behaviours (visual + suggested scent).
+
+CMS contains seed data from the catalogue. 
+
+One Scent Club - Catalogue
+
+Output format required from AI builder
+
+Return a zip or repo listing with: /README.md, /seed/data.json, /schema/cms-schema.json, /components/* (stubs), /design/storyboard.md. Provide code snippets inline for critical components (DualitySwitcher & DoodleBoard).
